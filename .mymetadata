@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="LearnSSH"
+  id="myeclipse.1451301951193"
+  context-root="/LearnSSH"
+  j2ee-spec="5.0"
+  archive="LearnSSH.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

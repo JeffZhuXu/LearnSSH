@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="default" location="0,0" size="0,0">
+    <action name="testA" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="node.jsp" />
+      </result>
+    </action>
+    <action name="testAerror" location="0,0" size="0,0">
+      <result name="error">
+        <resourceEdge source="error" routing="0" target="error.jsp" />
+      </result>
+    </action>
+    <action name="testB" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="node.jsp" />
+      </result>
+    </action>
+    <action name="testC" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="node.jsp" />
+      </result>
+    </action>
+    <action name="login" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="signin.jsp" />
+      </result>
+    </action>
+    <action name="loginSystem" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="index.jsp" />
+      </result>
+      <result name="failed">
+        <resourceEdge source="failed" routing="0" target="signin.jsp" />
+      </result>
+    </action>
+    <action name="systemInfo" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="systemInfo.jsp" />
+      </result>
+    </action>
+    <action name="allFiles" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="allFiles.jsp" />
+      </result>
+    </action>
+    <action name="allNodes" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="allNodes.jsp" />
+      </result>
+    </action>
+    <action name="allTasks" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="allTasks.jsp" />
+      </result>
+    </action>
+    <action name="newTask" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="newTask.jsp" />
+      </result>
+    </action>
+    <action name="createTask" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="deleteTask" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="allFilesAndBlocks" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="hello" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="nodeLogin" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="nodeLogout" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="nodeUpdate" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="uploadFile" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="updateSystem" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="pushFileToNode" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="deleteFileInNode" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="uploadTaskResult" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="uploadFileResult" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+  </package>
+  <webResource name="node.jsp" path="/node.jsp" location="0,0" size="0,0" />
+  <webResource name="error.jsp" path="/error.jsp" location="0,0" size="0,0" />
+  <webResource name="signin.jsp" path="/signin.jsp" location="0,0" size="0,0" />
+  <webResource name="index.jsp" path="/index.jsp" location="0,0" size="0,0" />
+  <webResource name="systemInfo.jsp" path="/systemInfo.jsp" location="0,0" size="0,0" />
+  <webResource name="allFiles.jsp" path="/allFiles.jsp" location="0,0" size="0,0" />
+  <webResource name="allNodes.jsp" path="/allNodes.jsp" location="0,0" size="0,0" />
+  <webResource name="allTasks.jsp" path="/allTasks.jsp" location="0,0" size="0,0" />
+  <webResource name="newTask.jsp" path="/newTask.jsp" location="0,0" size="0,0" />
+</Struts2Diagram>
+

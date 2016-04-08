@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<constant name="struts.objectFactory" value="spring" />
+	<package name="default" namespace="/" extends="struts-default">
+	
+	<action name="testA" class="com.yisinian.mdfs.action.TestA" method="test">
+	<result name ="success">/node.jsp</result>
+	</action>
+	
+	<action name="testAerror" class="com.yisinian.mdfs.action.TestA" method="error">
+	<result name ="error">/error.jsp</result>
+	</action>
+	
+	<action name="testB" class="nodeMessageAction" method="getNodeMessage">
+	<result name = "success">/node.jsp</result>
+	</action>
+	
+	<action name="testC" class="printHtmlAction" method="printHtml">
+	<result name = "success">/node.jsp</result>
+	</action>
+	
+	<action name="login" class="loginAction" method="start">
+	<result name = "success">/signin.jsp</result>
+	</action>
+	
+	<action name="loginSystem" class="loginSystemAction" method="loginWithoutPassword">
+	<result name = "success">/index.jsp</result>
+	<result name = "failed">/signin.jsp</result>
+	</action>
+	
+	<action name="systemInfo" class="systemInfoAction" method="getSystemInfo">
+	<result name = "success">/systemInfo.jsp</result>
+	</action>
+	
+	<action name="changeSystemInfo" class="ChangeSystemInfoAction" method="changeSystemInfo">
+	<result name = "success" type="redirect">/systemInfo.action</result> 
+	</action>
+	
+	<action name="allFiles" class="allFilesAction" method="getAllFiles">
+	<result name = "success">/allFiles.jsp</result>
+	</action>
+	
+	<action name="allNodes" class="allNodesAction" method="getAllNodes">
+	<result name = "success">/allNodes.jsp</result>
+	</action>
+	
+	<action name="allTasks" class="allTasksAction" method="getAllTasks">
+	<result name = "success">/allTasks.jsp</result>
+	</action>
+	
+	<action name="newTask" class="newTaskAction" method="getNewTask">
+	<result name = "success">/newTask.jsp</result>
+	</action>
+	
+	<action name="createTask" class="createTaskAction" method="createTask">
+	<result name = "success" type="redirect">/allTasks.action</result>
+	</action>
+	
+	<action name="deleteTask" class="deleteTaskAction" method="deleteTask">
+	<result name = "success" type="redirect">/allTasks.action</result>
+	</action>
+	
+	<!-- 获取所有的文件以及文件的分块信息，放在一起返回 -->
+	<action name="allFilesAndBlocks" class="allFilesAndBlocksAction" method="getAllFilesAndBlocks">
+	<!-- 跳转到JSP -->
+	<result name = "success">/allFiles.jsp</result>
+	</action>
+	
+	<!-- 测试移动端的访问请求 -->
+	<action name="hello" class="helloAction" method="hello">
+	<result name = "success">null</result>
+	</action>
+	
+	<!-- 节点登录注册接口 -->
+	<action name="nodeLogin" class="nodeLoginAction" method="nodeLogin">
+	<result name = "success">null</result>
+	</action>
+	
+	<!-- 节点登出接口 -->
+	<action name="nodeLogout" class="nodeLogoutAction" method="nodeLogout">
+	<result name = "success">null</result>
+	</action>
+	
+	<!-- 节点信息更新接口 -->
+	<action name="nodeUpdate" class="nodeUpdateAction" method="nodeUpdate">
+	<result name = "success">null</result>
+	</action>
+	
+	<!-- 节点信息更新接口 -->
+	<action name="uploadFile" class="uploadFileAction" method="upload">
+	<result name = "success">null</result>
+	</action>
+	
+	<!-- 节点信息更新接口 -->
+	<action name="updateSystem" class="updateSystemAction" method="updateSystem">
+	<!-- 跳转到某一个接口 -->
+	<result name="success" type="redirect">/systemInfo.action</result>
+	</action>
+	
+	<!-- 将文件推送到节点接口 -->
+	<action name="pushFileToNode" class="pushFileToNodeAction" method="pushFileToNode">
+	<!-- 重定向到文件列表接口 -->
+	<result name="success" type="redirect">/allFilesAndBlocks.action</result>
+	</action>
+	
+	<!-- 删除文件接口-->
+	<action name="deleteFileInNode" class="deleteFileInNodeAction" method="deleteFileInNode">
+	<result name="success" type="redirect">/allFilesAndBlocks.action</result>
+	</action>
+	
+	<!-- 节点上传任务结果接口 -->
+	<action name="uploadTaskResult" class="uploadTaskResultAction" method="uploadTaskResult">
+	<result name = "success">null</result>
+	</action>
+	
+	<!-- 节点上传下载文件信息结果接口 -->
+	<action name="uploadFileResult" class="uploadFileResultAction" method="uploadFileDownloadResult">
+	<result name = "success">null</result>
+	</action>
+	
+	</package>
+</struts>    
