@@ -1,6 +1,7 @@
 package com.yisinian.mdfs.orm;
 
 import java.util.List;
+
 import org.hibernate.LockMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -190,6 +191,19 @@ public class NodeTaskDAO extends HibernateDaoSupport {
 			String queryString = "from NodeTask as model where model."
 					+ NODE_ID + "= ?" +" and model.state='0'";
 			return getHibernateTemplate().find(queryString, nodeId);
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
+	//找到摸个任务完成的子任务个数
+	public String findFinishedNodeTaskNum(Object taskId) {
+		log.debug("finding NodeTask instance with property: " + NODE_ID
+				+ ", value: " + taskId);
+		try {
+			String queryString = "select count(*) from NodeTask as model where model."
+					+ TASK_ID + "= ?" +" and model.state='1'";
+			return getHibernateTemplate().find(queryString, taskId).get(0)+"";
 		} catch (RuntimeException re) {
 			log.error("find by property name failed", re);
 			throw re;

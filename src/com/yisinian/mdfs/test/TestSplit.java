@@ -9,9 +9,10 @@ public class TestSplit {
 	 */
 		
 	public static void main(String[] args) {
-		String aString="xiaohidao.log";
-		String[] bStrings=aString.split("\\.");
-		System.out.println(bStrings[0]);
-		System.out.println(bStrings[1]);
+		float finishRate = 0.0000000000f;
+		int a = 2;
+		int b = 3;
+		finishRate = (float)a/b;
+		System.out.println(finishRate);
 	}
 }

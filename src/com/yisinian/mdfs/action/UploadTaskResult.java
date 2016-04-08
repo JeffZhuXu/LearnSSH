@@ -1,12 +1,15 @@
 package com.yisinian.mdfs.action;
 
 import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
+
 import com.yisinian.mdfs.orm.BlockDAO;
 import com.yisinian.mdfs.orm.MdfsfileDAO;
 import com.yisinian.mdfs.orm.NodeDAO;
@@ -132,15 +135,8 @@ public class UploadTaskResult {
 				
 				
 				Task task=taskDAO.findById(taskId);
-				int finishTaskNum = task.getFinishTaskNum();
-				int allTaskNum = task.getNodeTaskNum();
-				int totalTime = Integer.parseInt(task.getTotalTime());
-				float finishRate = 0.000000f;
-				finishRate=(finishTaskNum+1)/allTaskNum;
-				task.setFinishTaskNum(finishTaskNum+1);
-				task.setFinishRate(finishRate);
-				task.setTotalTime(totalTime+finishTime+"");
-				taskDAO.merge(task);
+
+				
 				String resultFilePath = "D:\\zhuxu\\ROOT\\MDFSResults\\"+task.getResultPath();
 				//保存结果
 				TaskUtil.writeSearchResultsIntoFile(resultFilePath, taskResult);
@@ -148,6 +144,16 @@ public class UploadTaskResult {
 				nodeTask.setState("1");
 				nodeTask.setFinishTime(finishTime+"");
 				nodeTaskDAO.merge(nodeTask);
+				
+				int allTaskNum = task.getNodeTaskNum();
+				int totalTime = Integer.parseInt(task.getTotalTime());
+				float finishRate = 0.00f;
+				int finishTaskNum = task.getFinishTaskNum();
+				finishRate=(float)(finishTaskNum+1)/allTaskNum;
+				task.setFinishTaskNum(finishTaskNum+1);
+				task.setFinishRate(finishRate);
+				task.setTotalTime(totalTime+finishTime+"");
+				taskDAO.merge(task);
 				
 				//任务类型不是文件检索或者任务已经提交过
 			}else {

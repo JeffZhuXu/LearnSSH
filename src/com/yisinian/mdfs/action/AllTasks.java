@@ -16,7 +16,6 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.yisinian.mdfs.orm.BlockDAO;
-import com.yisinian.mdfs.orm.Mdfsfile;
 import com.yisinian.mdfs.orm.MdfsfileDAO;
 import com.yisinian.mdfs.orm.NodeDAO;
 import com.yisinian.mdfs.orm.NodeTaskDAO;
@@ -131,7 +130,7 @@ public class AllTasks extends ActionSupport {
 				aTask.put("parameter", a.getContent());
 				aTask.put("taskNumber", a.getNodeTaskNum());
 				aTask.put("finishNumber", a.getFinishTaskNum());
-				aTask.put("finishRate", a.getFinishRate());
+				aTask.put("finishRate", a.getFinishRate()+"");
 				aTask.put("result", a.getResultPath());
 				aTask.put("finishTime", a.getTotalTime());
 				allTasksArray.add(aTask);
