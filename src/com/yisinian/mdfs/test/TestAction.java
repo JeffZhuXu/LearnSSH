@@ -3,7 +3,6 @@ package com.yisinian.mdfs.test;
 import org.apache.log4j.Logger;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yisinian.mdfs.orm.Node;
 import com.yisinian.mdfs.orm.NodeDAO;
 
 public class TestAction extends ActionSupport {
@@ -19,8 +18,8 @@ public class TestAction extends ActionSupport {
 	
 	public String getNodeMessage(){
 		log.warn("----------test action testB---------");
-		Node aNode = nodeDAO.findById("3");
-		log.warn("----------节点id： "+aNode.getNodeId()+" node节点名称："+aNode.getNodeName()+"------------");
+//		Node aNode = nodeDAO.findById("3");
+//		log.warn("----------节点id： "+aNode.getNodeId()+" node节点名称："+aNode.getNodeName()+"------------");
 		
 		return "success";
 	}

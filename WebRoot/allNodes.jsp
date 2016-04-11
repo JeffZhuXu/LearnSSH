@@ -348,8 +348,11 @@
                                     <span class="line"></span>Net Speed
                                 </th>
                                 <th class="span2 sortable">
+                                    <span class="line"></span>RelayTime
+                                </th>                                 
+                                <th class="span2 sortable">
                                     <span class="line"></span>State
-                                </th>
+                                </th>                             
                             </tr>
                         </thead>
                         <tbody>
@@ -387,6 +390,9 @@
                             </td>
                             <td>
                                 <%=aNode.get("netSpeed") %>
+                            </td>
+                            <td>
+                                <%=aNode.get("relayTime") %> ms
                             </td>
                             <td>
                                 <!-- 节点状态，label标签显示-->

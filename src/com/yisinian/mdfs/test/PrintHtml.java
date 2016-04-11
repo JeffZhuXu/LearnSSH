@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.yisinian.mdfs.orm.Node;
 import com.yisinian.mdfs.orm.NodeDAO;
 
 public class PrintHtml extends ActionSupport {
@@ -32,12 +31,12 @@ public class PrintHtml extends ActionSupport {
 
 	public String printHtml() {
 		String nodeId = getParam("nodeId").toString();
-		Node aNode = nodeDAO.findById(nodeId);
+//		Node aNode = nodeDAO.findById(nodeId);
 		getResponse().setContentType("text/html;charset=UTF-8");
 		try {
 			PrintWriter out = getResponse().getWriter();
 			out = getResponse().getWriter();
-			out.println("nodeId为 ："+nodeId+" 的节点名称为："+aNode.getNodeName());
+//			out.println("nodeId为 ："+nodeId+" 的节点名称为："+aNode.getNodeName());
 			log.warn("··········查看某一个节点的节点名称··········");
 			out.flush();
 			out.close();

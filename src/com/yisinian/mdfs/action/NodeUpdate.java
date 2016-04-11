@@ -139,6 +139,7 @@ public class NodeUpdate extends ActionSupport {
 				aNode.setNetType(getParam("net_type").toString());
 				aNode.setNetSpeed(getParam("net_speed").toString());
 				aNode.setState(getParam("state").toString());
+				aNode.setRelayTime(getParam("relay_time").toString());
 				aNode.setEndTime(MDFSTime.getStandardTimeAsString());
 				nodeDAO.merge(aNode); // 新建或者更新节点数据
 				

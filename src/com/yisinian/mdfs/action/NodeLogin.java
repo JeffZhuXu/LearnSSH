@@ -14,8 +14,6 @@ import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
-import sun.security.x509.SerialNumber;
-
 import com.opensymphony.xwork2.ActionSupport;
 import com.yisinian.mdfs.constant.StatusCode;
 import com.yisinian.mdfs.orm.BlockDAO;
@@ -113,6 +111,7 @@ public class NodeLogin extends ActionSupport {
 			aNode.setStorage(getParam("storage").toString());
 			aNode.setRestStorage(getParam("rest_storage").toString());		
 			aNode.setRam(getParam("ram").toString());
+			aNode.setRelayTime("0");
 			//虚拟机上传的主频为N/A，将其置为默认的500
 			if(getParam("cpu_frequency").toString().equals("N/A")){
 				aNode.setCpuFrequency("1000000");

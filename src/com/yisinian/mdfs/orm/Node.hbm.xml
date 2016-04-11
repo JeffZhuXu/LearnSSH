@@ -11,7 +11,7 @@
             <generator class="native" />
         </id>
         <property name="nodeId" type="java.lang.String">
-            <column name="node_id" length="20" not-null="true">
+            <column name="node_id" length="20" not-null="true" unique="true">
                 <comment>节点唯一标识</comment>
             </column>
         </property>
@@ -49,22 +49,22 @@
             </column>
         </property>
         <property name="localStorage" type="java.lang.String">
-            <column name="local_storage" length="10" not-null="true">
+            <column name="local_storage" length="20" not-null="true">
                 <comment>本地总的存储空间</comment>
             </column>
         </property>
         <property name="restLocalStorage" type="java.lang.String">
-            <column name="rest_local_storage" length="10" not-null="true">
+            <column name="rest_local_storage" length="20" not-null="true">
                 <comment>本地剩余存储空间</comment>
             </column>
         </property>
         <property name="storage" type="java.lang.String">
-            <column name="storage" length="10" not-null="true">
+            <column name="storage" length="20" not-null="true">
                 <comment>提供给MDFS的容量</comment>
             </column>
         </property>
         <property name="restStorage" type="java.lang.String">
-            <column name="rest_storage" length="10" not-null="true">
+            <column name="rest_storage" length="20" not-null="true">
                 <comment>提供给mdfs剩余的存储空间</comment>
             </column>
         </property>
@@ -126,6 +126,11 @@
         <property name="endTime" type="java.lang.String">
             <column name="end_time" length="20" not-null="true">
                 <comment>最近的退出时间</comment>
+            </column>
+        </property>
+        <property name="relayTime" type="java.lang.String">
+            <column name="relay_time" length="10" not-null="true">
+                <comment>手机ping服务器时延，单位毫秒</comment>
             </column>
         </property>
     </class>

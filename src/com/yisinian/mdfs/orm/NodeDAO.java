@@ -2,6 +2,7 @@ package com.yisinian.mdfs.orm;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.LockMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,7 @@ public class NodeDAO extends HibernateDaoSupport {
 	public static final String STATE = "state";
 	public static final String START_TIME = "startTime";
 	public static final String END_TIME = "endTime";
+	public static final String RELAY_TIME = "relayTime";
 
 	protected void initDao() {
 		// do nothing
@@ -74,11 +76,11 @@ public class NodeDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public Node findById(String nodeId) {
-		log.debug("getting Node instance with id: " + nodeId);
+	public Node findById(java.lang.Integer id) {
+		log.debug("getting Node instance with id: " + id);
 		try {
 			Node instance = (Node) getHibernateTemplate().get(
-					"com.yisinian.mdfs.orm.Node", nodeId);
+					"com.yisinian.mdfs.orm.Node", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -206,6 +208,10 @@ public class NodeDAO extends HibernateDaoSupport {
 
 	public List findByEndTime(Object endTime) {
 		return findByProperty(END_TIME, endTime);
+	}
+
+	public List findByRelayTime(Object relayTime) {
+		return findByProperty(RELAY_TIME, relayTime);
 	}
 
 	public List findAll() {

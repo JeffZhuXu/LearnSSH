@@ -95,19 +95,20 @@ public class AllNodes extends ActionSupport {
 		List<Node> nodes = nodeDAO.findAll();
 		
 		for (int i = 0; i < nodes.size(); i++) {
-			
+			Node oneNode = nodes.get(i);
 			JSONObject aNode = new JSONObject();
-			aNode.put("nodeId", nodes.get(i).getNodeId());
-			aNode.put("nodeName", nodes.get(i).getNodeName());
-			aNode.put("company", nodes.get(i).getCompany());
-			aNode.put("phoneType", nodes.get(i).getPhoneType());
-			aNode.put("os", nodes.get(i).getOs());
-			aNode.put("osVersion", nodes.get(i).getOsVersion());
-			aNode.put("storage", nodes.get(i).getStorage());
-			aNode.put("restStorage", nodes.get(i).getRestStorage());
-			aNode.put("netType", nodes.get(i).getNetType());
-			aNode.put("netSpeed", nodes.get(i).getNetSpeed());
-			aNode.put("state", nodes.get(i).getState());
+			aNode.put("nodeId", oneNode.getNodeId());
+			aNode.put("nodeName", oneNode.getNodeName());
+			aNode.put("company", oneNode.getCompany());
+			aNode.put("phoneType", oneNode.getPhoneType());
+			aNode.put("os", oneNode.getOs());
+			aNode.put("osVersion", oneNode.getOsVersion());
+			aNode.put("storage", oneNode.getStorage());
+			aNode.put("restStorage", oneNode.getRestStorage());
+			aNode.put("netType", oneNode.getNetType());
+			aNode.put("netSpeed", oneNode.getNetSpeed());
+			aNode.put("state", oneNode.getState());
+			aNode.put("relayTime", oneNode.getRelayTime());
 			allNodesArray.add(aNode);
 		}
 		getRequest().setAttribute("allNodesMsg", allNodesArray.toArray());
