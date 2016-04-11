@@ -34,6 +34,7 @@ public class Node implements java.io.Serializable {
 	private String startTime;
 	private String endTime;
 	private String relayTime;
+	private String netLevel;
 
 	// Constructors
 
@@ -49,7 +50,7 @@ public class Node implements java.io.Serializable {
 			String cpuFrequency, String coreNumber, String netType,
 			String netSpeed, String phoneModel, String imel,
 			String serialNumber, String jpushId, String state,
-			String startTime, String endTime, String relayTime) {
+			String startTime, String endTime, String relayTime, String netLevel) {
 		this.nodeId = nodeId;
 		this.systemId = systemId;
 		this.nodeName = nodeName;
@@ -75,6 +76,7 @@ public class Node implements java.io.Serializable {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.relayTime = relayTime;
+		this.netLevel = netLevel;
 	}
 
 	// Property accessors
@@ -285,6 +287,14 @@ public class Node implements java.io.Serializable {
 
 	public void setRelayTime(String relayTime) {
 		this.relayTime = relayTime;
+	}
+
+	public String getNetLevel() {
+		return this.netLevel;
+	}
+
+	public void setNetLevel(String netLevel) {
+		this.netLevel = netLevel;
 	}
 
 }

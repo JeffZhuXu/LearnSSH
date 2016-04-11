@@ -64,7 +64,6 @@ public class PrintHtml extends ActionSupport {
 	protected HttpSession getSession() {
 		return ServletActionContext.getRequest().getSession();
 	}
-	
 	protected Cookie[] getCookie() {
 		return ServletActionContext.getRequest().getCookies();
 	}

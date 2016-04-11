@@ -109,12 +109,13 @@ public class AllNodes extends ActionSupport {
 			aNode.put("netSpeed", oneNode.getNetSpeed());
 			aNode.put("state", oneNode.getState());
 			aNode.put("relayTime", oneNode.getRelayTime());
+			aNode.put("netLevel", oneNode.getNetLevel());
 			allNodesArray.add(aNode);
 		}
 		getRequest().setAttribute("allNodesMsg", allNodesArray.toArray());
 		log.warn("node 个数："+allNodesArray.size());
 		log.warn("··········获取所有的节点信息··········");
-		log.warn(allNodesArray.toString());
+		//log.warn(allNodesArray.toString());
 		return "success";
 	}
 	

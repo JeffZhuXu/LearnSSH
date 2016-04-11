@@ -133,5 +133,10 @@
                 <comment>手机ping服务器时延，单位毫秒</comment>
             </column>
         </property>
+        <property name="netLevel" type="java.lang.String">
+            <column name="net_level" length="3" not-null="true">
+                <comment>网络状况，好坏等级</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

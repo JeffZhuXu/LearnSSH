@@ -131,7 +131,12 @@ public class NodeUpdate extends ActionSupport {
 				String nodeId= getParam("node_id").toString();
 				
 				Node aNode = nodes.get(0);
-
+				String relayTime = getParam("relay_time").toString();
+				//网络状况等级，10为差等级，超过10的话，表示该节点不可用
+				int netLevel =10;
+				netLevel = (int)(Float.valueOf(relayTime)/50);
+				
+				
 				aNode.setNodeId(getParam("node_id").toString());
 				aNode.setRestLocalStorage(getParam("rest_local_storage").toString());
 				aNode.setStorage(getParam("storage").toString());
@@ -139,7 +144,9 @@ public class NodeUpdate extends ActionSupport {
 				aNode.setNetType(getParam("net_type").toString());
 				aNode.setNetSpeed(getParam("net_speed").toString());
 				aNode.setState(getParam("state").toString());
-				aNode.setRelayTime(getParam("relay_time").toString());
+				aNode.setRelayTime(relayTime);
+				aNode.setNetLevel(netLevel+"");
+				
 				aNode.setEndTime(MDFSTime.getStandardTimeAsString());
 				nodeDAO.merge(aNode); // 新建或者更新节点数据
 				

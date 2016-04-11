@@ -311,6 +311,7 @@
                         <th>File Download Time</th>
                         <th>File Process Time</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -346,13 +347,12 @@
                             </td>
                             <td class="description">
                             <%=aFile.get("status") %>
-                                <ul class="actions">
-                                    <li class="last"><a href="pushFileToNode.action?fileId=<%=aFile.get("fileId") %>">Push</a></li>
-                                </ul>
-                            	<ul class="actions">
-                                	<li class="last"><a href="deleteFileInNode.action?fileId=<%=aFile.get("fileId") %>">Delete</a></li>
-                            	</ul>
-                            </td>    
+                            </td> 
+                            <td class="description">
+                             	<a href="pushFileToNode.action?fileId=<%=aFile.get("fileId") %>">Push</a>
+                             	<a href="deleteFileInNode.action?fileId=<%=aFile.get("fileId") %>">Delete</a>
+                             	<a href="getFileFromNode.action?fileId=<%=aFile.get("fileId") %>">Get</a>
+                            </td>   
                     </tr>
                     
                     

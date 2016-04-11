@@ -112,6 +112,7 @@ public class NodeLogin extends ActionSupport {
 			aNode.setRestStorage(getParam("rest_storage").toString());		
 			aNode.setRam(getParam("ram").toString());
 			aNode.setRelayTime("0");
+			aNode.setNetLevel("10");
 			//虚拟机上传的主频为N/A，将其置为默认的500
 			if(getParam("cpu_frequency").toString().equals("N/A")){
 				aNode.setCpuFrequency("1000000");

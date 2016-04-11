@@ -49,6 +49,7 @@ public class NodeDAO extends HibernateDaoSupport {
 	public static final String START_TIME = "startTime";
 	public static final String END_TIME = "endTime";
 	public static final String RELAY_TIME = "relayTime";
+	public static final String NET_LEVEL = "netLevel";
 
 	protected void initDao() {
 		// do nothing
@@ -212,6 +213,10 @@ public class NodeDAO extends HibernateDaoSupport {
 
 	public List findByRelayTime(Object relayTime) {
 		return findByProperty(RELAY_TIME, relayTime);
+	}
+
+	public List findByNetLevel(Object netLevel) {
+		return findByProperty(NET_LEVEL, netLevel);
 	}
 
 	public List findAll() {
