@@ -1,22 +1,15 @@
 package com.yisinian.mdfs.action;
 
-import org.apache.log4j.Logger;
-
 import com.opensymphony.xwork2.ActionSupport;
 
 
 public class TestA extends ActionSupport {
 	
-	protected static final Logger log = Logger.getLogger(TestA.class);
-	private static final long serialVersionUID = 1;
-	
-	public String test(){
-		log.warn("--------test action teatA----------");
-		return "success";
+public static void main(String[] args) {
+	for (int i = 0; i < 100; i++) {
+		int x=(int)(Math.random()*50);
+		System.err.println(x+"");
 	}
-	public String error(){
-		log.warn("--------test action teatAerror----------");
-		return "error";
-	}
+}
 
 }

@@ -222,7 +222,7 @@ public class NodeDAO extends HibernateDaoSupport {
 	public List findAll() {
 		log.debug("finding all Node instances");
 		try {
-			String queryString = "from Node";
+			String queryString = "from Node ORDER BY state DESC";
 			return getHibernateTemplate().find(queryString);
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -305,6 +305,18 @@ public class NodeDAO extends HibernateDaoSupport {
 			return nodeNumberList;
 		} catch (RuntimeException re) {
 			log.error("find node countAllNumber failed", re);
+			throw re;
+		}
+	}
+	
+	//查找在线节点且网络等级小于10的，自适应列表
+	public List<Node> getAdaptLiveNodeNumber() {
+		try {
+			String queryString = "from Node as model where model."
+					+ STATE + "= '1' and model."+NET_LEVEL +" <10";
+			return getHibernateTemplate().find(queryString);
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
 			throw re;
 		}
 	}

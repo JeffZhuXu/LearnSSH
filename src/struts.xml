@@ -120,5 +120,10 @@
 	<result name = "success">null</result>
 	</action>
 	
+	<!-- 节点ping服务器接口 -->
+	<action name="ping" class="pingAction" method="ping">
+	<result name = "success">null</result>
+	</action>
+	
 	</package>
 </struts>    

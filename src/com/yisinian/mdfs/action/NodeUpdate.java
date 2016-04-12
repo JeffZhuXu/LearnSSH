@@ -196,8 +196,6 @@ public class NodeUpdate extends ActionSupport {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
 		return "success";
 	}
 	

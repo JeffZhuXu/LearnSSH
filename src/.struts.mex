@@ -39,25 +39,20 @@
         <resourceEdge source="success" routing="0" target="systemInfo.jsp" />
       </result>
     </action>
+    <action name="changeSystemInfo" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
     <action name="allFiles" location="0,0" size="0,0">
-      <result name="success">
-        <resourceEdge source="success" routing="0" target="allFiles.jsp" />
-      </result>
+      <result name="success" />
     </action>
     <action name="allNodes" location="0,0" size="0,0">
-      <result name="success">
-        <resourceEdge source="success" routing="0" target="allNodes.jsp" />
-      </result>
+      <result name="success" />
     </action>
     <action name="allTasks" location="0,0" size="0,0">
-      <result name="success">
-        <resourceEdge source="success" routing="0" target="allTasks.jsp" />
-      </result>
+      <result name="success" />
     </action>
     <action name="newTask" location="0,0" size="0,0">
-      <result name="success">
-        <resourceEdge source="success" routing="0" target="newTask.jsp" />
-      </result>
+      <result name="success" />
     </action>
     <action name="createTask" location="0,0" size="0,0">
       <result name="success" />

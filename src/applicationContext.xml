@@ -261,6 +261,9 @@
 		<property name="nodeTaskDAO" ref="NodeTaskDAO"></property> 
 		</bean>	
 		
+		<bean id="pingAction"  class="com.yisinian.mdfs.action.Ping">
+		</bean>	
+		
 <!-- SpringDao类的配置 -->
 
 	<bean id="PeopleDAO" class="com.yisinian.mdfs.orm.PeopleDAO">

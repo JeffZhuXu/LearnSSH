@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -23,6 +24,7 @@ import com.yisinian.mdfs.orm.Block;
 import com.yisinian.mdfs.orm.BlockDAO;
 import com.yisinian.mdfs.orm.Mdfsfile;
 import com.yisinian.mdfs.orm.MdfsfileDAO;
+import com.yisinian.mdfs.orm.Node;
 import com.yisinian.mdfs.orm.NodeDAO;
 import com.yisinian.mdfs.orm.System;
 import com.yisinian.mdfs.orm.SystemDAO;
@@ -103,8 +105,12 @@ public class PushFileToNode extends ActionSupport {
 		String blockPath = "d:\\zhuxu\\ROOT\\MDFSFileBlocks\\"; //文件分块保存的路径
 		
 		try {
-			//获取在线节点的id列表集合
+			//获取在线节点的id列表集合，未开启自适应
 			List<String> liveNodeNumberList=nodeDAO.getLiveNodeNumber();
+			//获取在线节点id列表集合，开启自适应
+			List<String> adaptLiveNodeNumberList = new ArrayList<String>();
+			//自适应中列表元素个数
+			int adaptNodeListNum = 0;
 			//在线节点数量
 			int liveNodeNumber = liveNodeNumberList.size();
 			getRequest().setCharacterEncoding("UTF-8");
@@ -117,6 +123,11 @@ public class PushFileToNode extends ActionSupport {
 			short backupTime=system.getBackupTime();
 			//获取文件下载分配类型，平均分配或者是自适应分配
 			String adaptType = system.getAdaptTransmission();
+			//如果开启了自适应
+			if (adaptType.equals("1")) {
+				adaptLiveNodeNumberList = getAdaptNodeId();
+				adaptNodeListNum= adaptLiveNodeNumberList.size();
+			}
 			//获取是否压缩标识
 			String compressType = system.getCompress();
 			
@@ -177,7 +188,12 @@ public class PushFileToNode extends ActionSupport {
 			                	//保存到数据
 			                	Block aBlock = new Block();
 			                	aBlock.setFileId(fileId);
-			                	aBlock.setNodeId(liveNodeNumberList.get(nodeNumberSerialNum));
+			                	//如果开启了自适应，就从自适应列表第中随机拿，如果不是自适应，那么平均分
+			                	if (adaptType.equals("1")) {
+			                		aBlock.setNodeId(adaptLiveNodeNumberList.get((int)(Math.random()*adaptNodeListNum)));
+								}else {
+									aBlock.setNodeId(liveNodeNumberList.get(nodeNumberSerialNum));
+								}
 			                	aBlock.setBlockName(blockNameString);
 			                	aBlock.setFileSerialNumber(blockSerialNum);
 			                	aBlock.setBlockPath(blockPath+blockNameString);
@@ -224,5 +240,21 @@ public class PushFileToNode extends ActionSupport {
 			e.printStackTrace();
 		}
 		return "success";
+	}
+	//获取在线且网络等级小于10的自适应的文节点列表
+	public List<String> getAdaptNodeId(){
+		//找到在线的节点ID
+		List<Node> liveNodeList = nodeDAO.getAdaptLiveNodeNumber();
+		//存放返回的节点ID列表
+		List<String> liveNumberNodeList = new ArrayList<String>();
+		for (Node aNode:liveNodeList) {
+			int netLevel = Integer.parseInt(aNode.getNetLevel());
+			String nodeId = aNode.getNodeId();
+			//添加节点id，网络等级越好即网络等级值越小，该节点在列表中的个数也就越多，被抽中的概率也就越大
+			for (int i = 10; i > netLevel; i--) {
+				liveNumberNodeList.add(nodeId);
+			}
+		}
+		return liveNumberNodeList;
 	}
 }
