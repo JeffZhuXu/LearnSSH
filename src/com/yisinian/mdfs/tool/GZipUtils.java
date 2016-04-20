@@ -232,10 +232,10 @@ public abstract class GZipUtils {
 
 	public static void main(String[] args) {
 		long time = System.currentTimeMillis();
-		String filePath = "E:\\icheck01.log.gz";
+		String filePath = "E:\\icheck»’÷æ500K.log";
 		try {
 			// —πÀı
-			decompress(filePath);
+			compress(filePath,false);
 			// compress(filePath);
 		} catch (Exception e) {
 

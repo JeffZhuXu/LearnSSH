@@ -9,10 +9,7 @@ public class TestSplit {
 	 */
 		
 	public static void main(String[] args) {
-		float finishRate = 0.0000000000f;
-		int a = 2;
-		int b = 3;
-		finishRate = (float)a/b;
-		System.out.println(finishRate);
+		String aString = "aix";
+		System.out.println("×Ö·û´®µÄhash¹Ø¼ü×ÖÖµ£º"+aString.hashCode());
 	}
 }
