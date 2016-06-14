@@ -1,5 +1,6 @@
 package com.yisinian.mdfs.orm;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.LockMode;
 import org.slf4j.Logger;
@@ -93,6 +94,17 @@ public class NodeFileTaskDAO extends HibernateDaoSupport {
 		}
 	}
 
+	public List findUnfinishNodeLTtaskByNodeId(Object nodeID) {
+		try {
+			String queryString = "from NodeFileTask as model where model.getState='0' and model."
+					+ NODE_ID + "= ?";
+			return getHibernateTemplate().find(queryString, nodeID);
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
+	
 	public List findByNodeId(Object nodeId) {
 		return findByProperty(NODE_ID, nodeId);
 	}
@@ -163,7 +175,24 @@ public class NodeFileTaskDAO extends HibernateDaoSupport {
 			ApplicationContext ctx) {
 		return (NodeFileTaskDAO) ctx.getBean("NodeFileTaskDAO");
 	}
-	
+	//查找某一个节点上未完成的LT码文件上传任务
+	public  List<String> getUnfinishNodeFileTaskByNodeId(String nodeId) {
+		List<String> nodeFileTasks = new ArrayList<String>();
+
+		try {
+			String queryString = "select blockId from NodeFileTask where getState='0' and nodeId='"+nodeId+"'";
+			
+			List<String> resList=getHibernateTemplate().find(queryString);
+			int size = resList.size();
+			for (int i = 0; i < size; i++) {
+				nodeFileTasks.add(resList.get(i).toString());
+			}
+			return nodeFileTasks;
+		} catch (RuntimeException re) {
+			log.error("find node countAllNumber failed", re);
+			throw re;
+		}
+	}
 	//自定义升级某个字段
 	public void update(NodeFileTask transientInstance){
 		log.debug("update Ip instance");

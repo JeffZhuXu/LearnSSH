@@ -31,6 +31,7 @@ import com.yisinian.mdfs.orm.NodeDAO;
 import com.yisinian.mdfs.orm.NodeFileTask;
 import com.yisinian.mdfs.orm.NodeFileTaskDAO;
 import com.yisinian.mdfs.orm.SystemDAO;
+import com.yisinian.mdfs.tool.FileLTCodeUtils;
 import com.yisinian.mdfs.tool.MDFSTime;
 
 /**
@@ -125,11 +126,14 @@ public class UploadLTCodeFromNodes extends HttpServlet {
                             fos.flush();
                             fos.close();
                             
+                            
+                            
                             //找到节点上传的子任务信息，以及总的回收文件任务信息，更新相关状态
                             List<Block> ltBlocks=blockDAO.findByBlockName(fileNameString);
                             if (ltBlocks.size()>0) {
 								int blockId=ltBlocks.get(0).getBlockId();
 								int fileId = ltBlocks.get(0).getFileId();
+								
 								NodeFileTask aFileTask=(NodeFileTask)nodeFileTaskDAO.findByBlockId(blockId).get(0);
 								aFileTask.setGetState("1");
 								aFileTask.setGetTime(MDFSTime.getStandardTimeAsString());
@@ -137,9 +141,32 @@ public class UploadLTCodeFromNodes extends HttpServlet {
 								
 								GetFileTask aGetFileTask=(GetFileTask)getFileTaskDAO.findByFileId(fileId).get(0);
 								int getNum=aGetFileTask.getGetFileNum();
+								int needCodeNum=aGetFileTask.getNeedFileNum();
 								aGetFileTask.setGetFileNum(getNum+1);
 								getFileTaskDAO.update(aGetFileTask);
-								log.warn("文件块ID："+blockId+" 文件名："+fileNameString+" 文件ID："+fileId);							    							  
+								log.warn("文件块ID："+blockId+" 文件名："+fileNameString+" 文件ID："+fileId);
+								//当收集到的编码个数达到指定个数的时候，开始执行文件的LT码解码工作
+								if ((getNum+1)>=needCodeNum) {
+									Mdfsfile originalFile=mdfsfileDao.findById(fileId);
+									boolean decodeResult=FileLTCodeUtils.recoveryFileFromCodes(originalFile.getFileName(), fileId+"");
+									//如果解码成功，那么就没有必要再回收子任务了，直接删掉所有的回收任务
+									if (decodeResult) {
+										log.warn("文件： "+originalFile.getFileName()+" LT解码回收成功");
+										List<GetFileTask> getFileTasks=getFileTaskDAO.findByFileId(fileId);
+										if (getFileTasks.size()>0) {
+											//删除这条回收文件块的任务,同时删除回收的已经用过了的编码文件块
+											getFileTaskDAO.delete(getFileTasks.get(0));
+											File codeDir = new File(filePath);
+											if (codeDir.exists()&&codeDir.isDirectory()) {
+												for (File acodeFile:codeDir.listFiles()) {
+													if (acodeFile.getName().indexOf(fileId+"")==0) {
+														acodeFile.delete();
+													}
+												}
+											}
+										}
+									}
+								}
                             }
 						}else {
 							 log.warn("--------上传文件已存在----------");

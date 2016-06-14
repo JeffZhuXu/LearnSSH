@@ -193,10 +193,11 @@ public class NodeUpdate extends ActionSupport {
 				}
 				
 				//找到该节点上应该上传的文件块
-				List<NodeFileTask> nodeFileTasks=nodeFileTaskDAO.findByNodeId(nodeId);
+				List<NodeFileTask> nodeFileTasks=nodeFileTaskDAO.findUnfinishNodeLTtaskByNodeId(nodeId);
 				for (NodeFileTask aNodeFileTask:nodeFileTasks) {
 					fileUploadMsg.add(aNodeFileTask.getBlockId());
 				}
+
 				
 				results.put("statusCode", StatusCode.SUCESS);//返回正确码
 				results.put("nodeId", getParam("node_id").toString());
