@@ -331,7 +331,7 @@
                             <td class="description">
                              <%=aFile.get("fileSize") %> Byte
                             </td>
-                            </td>
+                 
                             <td class="description">
                             <%=aFile.get("fileUploadTime") %>
                             </td>
@@ -352,7 +352,13 @@
                              	<a href="pushFileToNode.action?fileId=<%=aFile.get("fileId") %>">Push</a>
                              	<a href="deleteFileInNode.action?fileId=<%=aFile.get("fileId") %>">Delete</a>
                              	<a href="getFileFromNode.action?fileId=<%=aFile.get("fileId") %>">Get</a>
-                            </td>   
+                             	<a href="pushLTFileToNode.action?fileId=<%=aFile.get("fileId") %>">LT Push</a>
+                             	<a href="getLTFileFromNode.action?fileId=<%=aFile.get("fileId") %>">LT Get</a>
+                            </td>
+                            <td class="description">
+                             	<a href="decodeFile/<%=aFile.get("fileName")%>">LT Download</a>
+                             	
+                            </td>  
                     </tr>
                     
                     

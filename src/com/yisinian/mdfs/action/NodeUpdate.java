@@ -20,9 +20,12 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.yisinian.mdfs.constant.StatusCode;
 import com.yisinian.mdfs.orm.Block;
 import com.yisinian.mdfs.orm.BlockDAO;
+import com.yisinian.mdfs.orm.GetFileTaskDAO;
 import com.yisinian.mdfs.orm.MdfsfileDAO;
 import com.yisinian.mdfs.orm.Node;
 import com.yisinian.mdfs.orm.NodeDAO;
+import com.yisinian.mdfs.orm.NodeFileTask;
+import com.yisinian.mdfs.orm.NodeFileTaskDAO;
 import com.yisinian.mdfs.orm.NodeTask;
 import com.yisinian.mdfs.orm.NodeTaskDAO;
 import com.yisinian.mdfs.orm.SystemDAO;
@@ -42,7 +45,24 @@ public class NodeUpdate extends ActionSupport {
 	private BlockDAO blockDAO;
 	private TaskDAO taskDAO;
 	private NodeTaskDAO nodeTaskDAO;
+	private GetFileTaskDAO getFileTaskDAO;
+	private NodeFileTaskDAO nodeFileTaskDAO;
+	
+	public GetFileTaskDAO getGetFileTaskDAO() {
+		return getFileTaskDAO;
+	}
 
+	public void setGetFileTaskDAO(GetFileTaskDAO getFileTaskDAO) {
+		this.getFileTaskDAO = getFileTaskDAO;
+	}
+
+	public NodeFileTaskDAO getNodeFileTaskDAO() {
+		return nodeFileTaskDAO;
+	}
+
+	public void setNodeFileTaskDAO(NodeFileTaskDAO nodeFileTaskDAO) {
+		this.nodeFileTaskDAO = nodeFileTaskDAO;
+	}
 	public TaskDAO getTaskDAO() {
 		return taskDAO;
 	}
@@ -123,6 +143,7 @@ public class NodeUpdate extends ActionSupport {
 			JSONObject results= new JSONObject();//返回值
 			JSONObject blockMsg = new JSONObject();//存放节点信息
 			JSONArray taskMsg = new JSONArray();	//存放节点上应该有的任务信息
+			JSONArray fileUploadMsg = new JSONArray();	//存放节点上应该上传的文件块信息
 			
 			List<Node> nodes =nodeDAO.findByProperty("nodeId", getParam("node_id").toString());
 			//找到节点信息
@@ -170,11 +191,20 @@ public class NodeUpdate extends ActionSupport {
 						aNodeTask.put("blockId", aTask.getBlockId());
 						taskMsg.add(aNodeTask);
 				}
+				
+				//找到该节点上应该上传的文件块
+				List<NodeFileTask> nodeFileTasks=nodeFileTaskDAO.findByNodeId(nodeId);
+				for (NodeFileTask aNodeFileTask:nodeFileTasks) {
+					fileUploadMsg.add(aNodeFileTask.getBlockId());
+				}
+				
 				results.put("statusCode", StatusCode.SUCESS);//返回正确码
 				results.put("nodeId", getParam("node_id").toString());
 				results.put("nodeId", getParam("node_id").toString());
 				results.put("blockMsg", blocks);//返回该节点上应该存放的节点信息
 				results.put("taskMsg", taskMsg);//返回该节点上应该执行的任务
+				results.put("fileUploadMsg", fileUploadMsg);//返回该节点上应该上传的文件块
+				
 				
 				log.warn("MDFS------节点更新成功------");
 				log.warn("节点id："+getParam("node_id").toString());

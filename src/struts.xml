@@ -105,6 +105,18 @@
 	<result name="success" type="redirect">/allFilesAndBlocks.action</result>
 	</action>
 	
+	<!-- 将文件进行LT码编码，并推送到节点接口 -->
+	<action name="pushLTFileToNode" class="pushLTFileToNodeAction" method="pushLTFileToNode">
+	<!-- 重定向到文件列表接口 -->
+	<result name="success" type="redirect">/allFilesAndBlocks.action</result>
+	</action>
+	
+	<!-- 将节点上的LT码收回来，复原初始文件 -->
+	<action name="getLTFileFromNode" class="getLTFileFromNodeAction" method="getLTFileFromNodes">
+	<!-- 重定向到文件列表接口 -->
+	<result name="success" type="redirect">/allFilesAndBlocks.action</result>
+	</action>
+	
 	<!-- 删除文件接口-->
 	<action name="deleteFileInNode" class="deleteFileInNodeAction" method="deleteFileInNode">
 	<result name="success" type="redirect">/allFilesAndBlocks.action</result>

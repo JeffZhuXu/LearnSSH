@@ -42,6 +42,16 @@
     <servlet-name>UploadFileToMDFS</servlet-name>
     <url-pattern>/uploadFileToMDFS</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <servlet-name>UploadLTCodeFromNodes</servlet-name>
+    <servlet-class>com.yisinian.mdfs.service.UploadLTCodeFromNodes</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>UploadLTCodeFromNodes</servlet-name>
+    <url-pattern>/uploadLTCodeFromNodes</url-pattern>
+  </servlet-mapping>  
  <!-- spring配置 -->
   
   

@@ -95,7 +95,11 @@
 				<value>com/yisinian/mdfs/orm/Node.hbm.xml</value>
 				<value>com/yisinian/mdfs/orm/Mdfsfile.hbm.xml</value>
 				<value>com/yisinian/mdfs/orm/NodeTask.hbm.xml</value>
-				<value>com/yisinian/mdfs/orm/Task.hbm.xml</value></list>
+				<value>com/yisinian/mdfs/orm/Task.hbm.xml</value>
+				<value>com/yisinian/mdfs/orm/GetFileTask.hbm.xml</value>
+				<value>
+					com/yisinian/mdfs/orm/NodeFileTask.hbm.xml
+				</value></list>
 		</property></bean>
 		
 <!-- strust action交给spring管理时调用的Dao类的配置 -->
@@ -176,6 +180,8 @@
 		<property name="blockDAO" ref="BlockDAO"></property> 
 		<property name="taskDAO" ref="TaskDAO"></property> 
 		<property name="nodeTaskDAO" ref="NodeTaskDAO"></property> 
+		<property name="getFileTaskDAO" ref="GetFileTaskDAO"></property> 
+		<property name="nodeFileTaskDAO" ref="NodeFileTaskDAO"></property> 
 		</bean>		
 		
 		<bean id="uploadFileAction"  class="com.yisinian.mdfs.action.UploadFile">
@@ -198,6 +204,22 @@
 		<property name="nodeDAO" ref="NodeDAO"></property> 
 		<property name="blockDAO" ref="BlockDAO"></property> 
 		</bean>	
+		
+		<bean id="pushLTFileToNodeAction"  class="com.yisinian.mdfs.action.PushLTFileToNode">
+		<property name="systemDAO" ref="SystemDAO"></property> 
+		<property name="mdfsfileDao" ref="MdfsfileDAO"></property>
+		<property name="nodeDAO" ref="NodeDAO"></property> 
+		<property name="blockDAO" ref="BlockDAO"></property> 
+		</bean>	
+
+		<bean id="getLTFileFromNodeAction"  class="com.yisinian.mdfs.action.GetLTFileFromNode">
+		<property name="systemDAO" ref="SystemDAO"></property> 
+		<property name="mdfsfileDao" ref="MdfsfileDAO"></property>
+		<property name="nodeDAO" ref="NodeDAO"></property> 
+		<property name="blockDAO" ref="BlockDAO"></property> 
+		<property name="getFileTaskDAO" ref="GetFileTaskDAO"></property> 
+		<property name="nodeFileTaskDAO" ref="NodeFileTaskDAO"></property> 		
+		</bean>			
 		
 		<bean id="deleteFileInNodeAction"  class="com.yisinian.mdfs.action.DeleteFileInNode">
 		<property name="systemDAO" ref="SystemDAO"></property> 
@@ -301,4 +323,15 @@
 			<ref bean="sessionFactory2" />
 		</property>
 	</bean>
-	</beans>
+	<bean id="GetFileTaskDAO"
+		class="com.yisinian.mdfs.orm.GetFileTaskDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory2" />
+		</property>
+	</bean>
+	<bean id="NodeFileTaskDAO"
+		class="com.yisinian.mdfs.orm.NodeFileTaskDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory2" />
+		</property>
+	</bean></beans>

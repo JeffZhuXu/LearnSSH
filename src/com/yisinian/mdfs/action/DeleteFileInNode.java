@@ -116,6 +116,27 @@ public class DeleteFileInNode extends ActionSupport {
 				FileOption.deleteFile(blockPath);
 				LOG.warn("删除分块文件："+blockPath);
 			}
+			//删除的文件相关的文件块，LT码等存储位置
+			File blockDir = new File("D:\\zhuxu\\ROOT\\blocks");
+			File codeDir = new File("D:\\zhuxu\\ROOT\\codes");
+			File decodeFileDir = new File("D:\\zhuxu\\ROOT\\decodeFile");
+			if (blockDir.isDirectory()&&codeDir.isDirectory()&&decodeFileDir.isDirectory()) {
+				for (File aFile:blockDir.listFiles()) {
+					if (aFile.getName().indexOf(fileId)==0) {
+						aFile.delete();
+					}
+				}
+				for (File aFile:codeDir.listFiles()) {
+					if (aFile.getName().indexOf(fileId)==0) {
+						aFile.delete();
+					}
+				}
+				for (File aFile:decodeFileDir.listFiles()) {
+					if (aFile.getName().indexOf(fileId)==0) {
+						aFile.delete();
+					}
+				}
+			}
 			//删除数据库中的文件信息，文件块信息级联外键自动删除
 			mdfsfileDao.delete(mdfsfile);
 		}
