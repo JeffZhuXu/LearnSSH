@@ -197,16 +197,12 @@ public class NodeUpdate extends ActionSupport {
 				for (NodeFileTask aNodeFileTask:nodeFileTasks) {
 					fileUploadMsg.add(aNodeFileTask.getBlockId());
 				}
-
-				
 				results.put("statusCode", StatusCode.SUCESS);//返回正确码
 				results.put("nodeId", getParam("node_id").toString());
 				results.put("nodeId", getParam("node_id").toString());
 				results.put("blockMsg", blocks);//返回该节点上应该存放的节点信息
 				results.put("taskMsg", taskMsg);//返回该节点上应该执行的任务
 				results.put("fileUploadMsg", fileUploadMsg);//返回该节点上应该上传的文件块
-				
-				
 				log.warn("MDFS------节点更新成功------");
 				log.warn("节点id："+getParam("node_id").toString());
 			}else {
